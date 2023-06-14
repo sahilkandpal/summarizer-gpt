@@ -19,7 +19,14 @@ export const articleApi = createApi({
             // If we do not properly encode these characters, they can be misinterpreted by the server and cause errors or unexpected behavior. Thus that RTK bug
             query: (params) => `summarize?url=${encodeURIComponent(params.articleUrl)}&length=3`,
         }),
+        getTextSummary: builder.mutation({
+            query: (body) => ({
+              url: `summarize-text`,
+              method: 'POST',
+              body,
+            }),
+        }),      
     }),
 })
 
-export const { useLazyGetSummaryQuery } = articleApi
+export const { useLazyGetSummaryQuery, useGetTextSummaryMutation } = articleApi
